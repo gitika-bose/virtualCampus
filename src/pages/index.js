@@ -6,7 +6,7 @@ class Index extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { width: 0, height: -1 };
+        this.state = { width: 0, height: -1, isLandscape: false };
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     }
 
@@ -20,61 +20,36 @@ class Index extends React.Component {
     }
 
     updateWindowDimensions() {
-        this.setState({ width: window.innerWidth, height: window.innerHeight });
+        this.setState({ width: window.innerWidth, height: window.innerHeight,
+                             isLandscape: window.innerWidth > window.innerHeight ? true : false});
     }
 
     // TODO: Remove duplicate code in HomeDesktop.js and HomeMobile.js
     render() {
+        if (this.state.height == -1) {
 
-        if (this.state.height === -1) {
-            return (
-                <div>
-                    <HomeDesktop/>
-                </div>
-            );
-        }
-        {/* For mobile's screen orientation update */}
-        const isLandscape = this.state.width > this.state.height ? true : false;
+            {/* On initial load */}
+            return ( <HomeDesktop/> );
 
-        {/* If Tablet:
-            If in portrait, do mobile component
-            else render desktop
-            */}
-        if (isTablet) {
-            if (isLandscape) {
-                return (
-                <div>
-                    <HomeDesktop/>
-                </div>
-                );
+        } else if (isTablet) {
+
+            {/* If Tablet: portrait, do mobile component; landscape, render desktop */}
+            if (this.state.isLandscape) {
+                return ( <HomeDesktop/> );
             } else {
-                return (
-                    <div>
-                        <HomeMobile isLandscape={isLandscape}/>
-                    </div>
-                );
+                return ( <HomeMobile isLandscape={this.state.isLandscape}/> );
             }
 
+        } else if (isMobile || (this.state.isLandscape === false && this.state.height > 700) || isIE || isEdge) {
 
-        {/* For mobile component : IE or Edge must go to mobile since they do not support all css */}
-        } else if (isMobile || (isLandscape === false && this.state.height > 700) || isIE || isEdge) {
-                return (
-                    <div>
-                        <HomeMobile isLandscape={isLandscape}/>
-                    </div>
-                );
+            {/* For mobile component : IE or Edge must go to mobile since they do not support all css */}
+            return ( <HomeMobile isLandscape={this.state.isLandscape}/> );
 
-
-        {/* Else: desktop: isBrowser
-            If screen is full size and not weirdly shape: render desktop version
-            Else render mobile version (see above)
-            */}
         } else {
-            return (
-                <div>
-                    <HomeDesktop />
-                </div>
-            );
+
+            {/* Else: desktop: isBrowser */}
+            return ( <HomeDesktop /> )
+
         }
     }
 }
