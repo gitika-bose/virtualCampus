@@ -149,12 +149,7 @@ const manualLandscape = makeStyles(() => ({
 }));
 export default function HomeMobile({isLandscape}) {
   const classes = useStyles();
-  let manual;
-  if (isLandscape) {
-    manual = manualLandscape();
-  } else {
-    manual = manualPortrait();
-  }
+  let manual = isLandscape ? manualLandscape() : manualPortrait();
   return (
       <div style={{background: "white"}}>
 

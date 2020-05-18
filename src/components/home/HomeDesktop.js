@@ -88,8 +88,7 @@ const manualSt = makeStyles(() => ({
 
 export default function HomeDesktop() {
   const classes = useStyles();
-  var manual;
-  manual = manualSt();
+  const manual = manualSt();
   return (
       <div style={{background: "white"}}>
 
