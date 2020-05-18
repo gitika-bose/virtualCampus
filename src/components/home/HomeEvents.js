@@ -1,5 +1,4 @@
 import React from "react"
-import Button from "../material-kit-components/CustomButtons/Button.js";
 import myEventsList from '../../assets/EventsData'
 import { withStyles } from "@material-ui/core/styles";
 import {EventCard, EventModal, CustomButton} from '../'

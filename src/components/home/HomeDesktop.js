@@ -1,10 +1,8 @@
-import React from "react"
-import classNames from "classnames";
-import HomeEvents from './HomeEvents';
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import landingImage from "../../assets/images/home/graphic.png";
 import styles from "../../assets/material-kit-assets/jss/material-kit-react/views/landingPage.js";
-import {MetaData, CustomHeader, CustomButton, Title, Subtitle} from "./../../components"
+import {HomepageHeadingShared, HomepageLandingShared, HomepageUpcomingEvents} from "./HomeShared";
 
 
 const useStyles = makeStyles(styles);
@@ -86,48 +84,20 @@ const manualSt = makeStyles(() => ({
 }));
 
 
+
+
 export default function HomeDesktop() {
   const classes = useStyles();
   var manual;
   manual = manualSt();
-    return (
-        <div style={{background: "white"}}>
-          <MetaData title={'Columbia Virtual Campus'}/>
-          <CustomHeader active={''} brand={''}></CustomHeader>
-          <div className={classNames(manual.landing)}>
-            <div className={classNames(manual.landingText)}>
-              <h1 className={classNames(manual.toAll, manual.toAllSecondary)}>
-                Stay connected through
-              </h1>
-              <h1 className={classNames(manual.toAll, manual.toAllPrimary)}>
-                Columbia Virtual Campus
-              </h1>
-              <h1 className={classNames(manual.toAllSubHeading)}>
-                Navigate Columbia and Barnard by keeping track of upcoming virtual events and online resources
-              </h1>
-              <CustomButton href={"/events"} text={'EXPLORE'} color={"orange"} size={"large"}/>
-            </div>
-          </div>
+  return (
+      <div style={{background: "white"}}>
 
-          <div style={{marginBottom: "2.5vh", background: "transparent"}}/>
-          <div className={classNames(classes.main, manual.eventsSection)} style={{textAlign: 'left'}}>
-            <div className={classes.container} id="explore">
-              <Title color={"blue"}>Upcoming Events</Title>
-              <div style={{textAlign: "center"}}>
-                <Subtitle color={'black'} className={manual.toAllSubHeadingUpEvents}>
-                  Do you or your club want to host your own event on Columbia Virtual Campus?
-                  <br/> Answer some short questions to get started!
-                </Subtitle>
-              </div>
-              <div style={{textAlign: 'center'}}>
-                <CustomButton href={'https://forms.gle/fzKvSZqkAVNN6cHY6'} text={'HOST A NEW EVENT'}
-                              color={"orange"} size={"large"}/>
-                <div style={{marginBottom: "40px"}}/>
-              </div>
-              <HomeEvents/>
-              <div style={{marginBottom: "100px"}}/>
-            </div>
-          </div>
-        </div>
-    )
+        <HomepageHeadingShared />
+        <HomepageLandingShared styles={manual} />
+        <div style={{marginBottom: "2.5vh", background: "transparent"}} />
+        <HomepageUpcomingEvents styles={manual} Classes={classes} />
+
+      </div>
+  )
 };

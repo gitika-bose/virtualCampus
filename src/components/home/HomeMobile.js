@@ -1,11 +1,8 @@
-import React from "react"
-import classNames from "classnames";
-import HomeEvents from './HomeEvents';
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import landingImage from "../../assets/images/home/graphic.png";
 import styles from "../../assets/material-kit-assets/jss/material-kit-react/views/landingPage.js";
-import Button from "./../material-kit-components/CustomButtons/Button.js";
-import {MetaData, CustomHeader, CustomButton, Title} from "../"
+import {HomepageHeadingShared, HomepageLandingShared, HomepageUpcomingEvents} from "./HomeShared";
 
 
 const useStyles = makeStyles(styles);
@@ -154,54 +151,18 @@ export default function HomeMobile({isLandscape}) {
   const classes = useStyles();
   var manual;
   if (isLandscape) {
-
-    // Process the landscape style
-    // NOTE: This only works on mobile devices
-    // Tablets will go to desktop component in landscape
     manual = manualLandscape();
   } else {
-
-    // Process the portrait style
     manual = manualPortrait();
   }
-
   return (
-    <div style={{background: "white"}}>
-      <MetaData title={'Columbia Virtual Campus'}/>
-      <CustomHeader active={''} brand={''}/>
-      <div className={classNames(manual.landing)} >
-        <div className={classNames(manual.landingText)}>
-          <h1 className={classNames(manual.toAll, manual.toAllSecondary)}>
-            Stay connected through
-          </h1>
-          <h1 className={manual.toAll}>
-            Columbia Virtual Campus
-          </h1>
-          <h1 className={classNames(manual.toAllSubHeading)}>
-            Navigate Columbia and Barnard by keeping track of upcoming virtual events and online resources
-          </h1>
-          <CustomButton href={"/events"} text={'EXPLORE'} color={"orange"} size={"large"}/>
-        </div>
-      </div>
+      <div style={{background: "white"}}>
 
-      <div style={{marginBottom: "5px", background: "transparent"}}/>
-      <div className={classNames(classes.main, manual.eventsSection)} style={{textAlign:'left',  background: "transparent"}}>
-          <div className={classes.container} id="explore">
-            <Title color={"blue"}>Upcoming Events</Title>
-            <div style={{textAlign: "center"}}>
-              <h1 className={classNames(manual.toAllSubHeadingUpEvents)}>
-                Do you or your club want to host your own event on Columbia Virtual Campus? Answer some short questions to get started!
-              </h1>
-            </div>
-            <div style={{textAlign:'center'}}>
-              <CustomButton href={'https://forms.gle/fzKvSZqkAVNN6cHY6'} text={'HOST A NEW EVENT'}
-                            color={"orange"} size={"large"}/>
-              <div style={{marginBottom: "40px"}}/>
-            </div>
-            <HomeEvents/>
-            <div style={{marginBottom: "100px"}}/>
-          </div>
+        <HomepageHeadingShared />
+        <HomepageLandingShared styles={manual} />
+        <div style={{marginBottom: "2.5vh", background: "transparent"}} />
+        <HomepageUpcomingEvents styles={manual} Classes={classes} />
+
       </div>
-    </div>
-    )
+  )
 };
